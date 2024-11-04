@@ -26,7 +26,7 @@ public class SistemaAcademicoMenu implements CommandLineRunner {
     @Autowired
     private ProfesorService profesorService;
 
-    private Scanner scanner = new Scanner(System.in);
+    private final Scanner scanner = new Scanner(System.in);
 
     @Override
     public void run(String... args) {
