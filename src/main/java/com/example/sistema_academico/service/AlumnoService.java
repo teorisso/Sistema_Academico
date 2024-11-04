@@ -11,64 +11,54 @@ import java.util.List;
 public class AlumnoService {
 
     @Autowired
-    AlumnoRepository alumnoRepository;
+    private AlumnoRepository alumnoRepository;
 
     public void addAlumno(Alumno alumno) {
         try {
             alumnoRepository.save(alumno);
-            System.out.println("Alumno agregado con exito");
-            System.out.println(alumno);
+            System.out.println("Alumno agregado con exito\n" + alumno);
         } catch (Exception e) {
-            System.out.println("Error al agregar alumno");
-            System.out.println(e);
+            System.out.println("Error al agregar alumno\n" + e);
         }
     }
 
-public void deleteAlumno(Integer legajo) {
-    try {
-        alumnoRepository.deleteById(legajo);
-        System.out.println("Alumno eliminado con exito");
-    } catch (Exception e) {
-        System.out.println("Error al eliminar alumno");
-        System.out.println(e);
+    public void deleteAlumno(Integer legajo) {
+        try {
+            alumnoRepository.deleteById(legajo);
+            System.out.println("Alumno eliminado con exito");
+        } catch (Exception e) {
+            System.out.println("Error al eliminar alumno\n" + e);
+        }
     }
-}
 
-public Alumno getAlumno(Integer legajo) {
-    try {
-        Alumno alumno = alumnoRepository.findById(legajo).orElse(null);
-        System.out.println("Alumno obtenido con exito");
-        System.out.println(alumno);
-        return alumno;
-    } catch (Exception e) {
-        System.out.println("Error al obtener alumno");
-        System.out.println(e);
-        return null;
+    public Alumno getAlumno(Integer legajo) {
+        try {
+            Alumno alumno = alumnoRepository.findById(legajo).orElse(null);
+            System.out.println("Alumno obtenido con exito\n" + alumno);
+            return alumno;
+        } catch (Exception e) {
+            System.out.println("Error al obtener alumno\n" + e);
+            return null;
+        }
     }
-}
 
-public List<Alumno> getAlumnos() {
-    try {
-        List<Alumno> alumnos = alumnoRepository.findAll();
-        System.out.println("Alumnos obtenidos con exito");
-        System.out.println(alumnos);
-        return alumnos;
-    } catch (Exception e) {
-        System.out.println("Error al obtener alumnos");
-        System.out.println(e);
-        return null;
+    public List<Alumno> getAlumnos() {
+        try {
+            List<Alumno> alumnos = alumnoRepository.findAll();
+            System.out.println("Alumnos obtenidos con exito\n" + alumnos);
+            return alumnos;
+        } catch (Exception e) {
+            System.out.println("Error al obtener alumnos\n" + e);
+            return null;
+        }
     }
-}
 
-public void updateAlumno(Alumno alumno) {
-    try {
-        alumnoRepository.save(alumno);
-        System.out.println("Alumno actualizado con exito");
-        System.out.println(alumno);
-    } catch (Exception e) {
-        System.out.println("Error al actualizar alumno");
-        System.out.println(e);
+    public void updateAlumno(Alumno alumno) {
+        try {
+            alumnoRepository.save(alumno);
+            System.out.println("Alumno actualizado con exito\n" + alumno);
+        } catch (Exception e) {
+            System.out.println("Error al actualizar alumno\n" + e);
+        }
     }
-}
-
 }

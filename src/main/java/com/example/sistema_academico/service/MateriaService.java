@@ -16,11 +16,9 @@ public class MateriaService {
     public void addMateria(Materia materia) {
         try {
             materiaRepository.save(materia);
-            System.out.println("Materia agregada con éxito");
-            System.out.println(materia);
+            System.out.println("Materia agregada con éxito\n" + materia);
         } catch (Exception e) {
-            System.out.println("Error al agregar materia");
-            System.out.println(e);
+            System.out.println("Error al agregar materia\n" + e);
         }
     }
 
@@ -29,20 +27,17 @@ public class MateriaService {
             materiaRepository.deleteById(id);
             System.out.println("Materia eliminada con éxito");
         } catch (Exception e) {
-            System.out.println("Error al eliminar materia");
-            System.out.println(e);
+            System.out.println("Error al eliminar materia\n" + e);
         }
     }
 
     public Materia getMateria(Integer id) {
         try {
             Materia materia = materiaRepository.findById(id).orElse(null);
-            System.out.println("Materia obtenida con éxito");
-            System.out.println(materia);
+            System.out.println("Materia obtenida con éxito\n" + materia);
             return materia;
         } catch (Exception e) {
-            System.out.println("Error al obtener materia");
-            System.out.println(e);
+            System.out.println("Error al obtener materia\n" + e);
             return null;
         }
     }
@@ -50,12 +45,10 @@ public class MateriaService {
     public List<Materia> getMaterias() {
         try {
             List<Materia> materias = materiaRepository.findAll();
-            System.out.println("Materias obtenidas con éxito");
-            System.out.println(materias);
+            System.out.println("Materias obtenidas con éxito\n" + materias);
             return materias;
         } catch (Exception e) {
-            System.out.println("Error al obtener materias");
-            System.out.println(e);
+            System.out.println("Error al obtener materias\n" + e);
             return null;
         }
     }
@@ -63,11 +56,9 @@ public class MateriaService {
     public void updateMateria(Materia materia) {
         try {
             materiaRepository.save(materia);
-            System.out.println("Materia actualizada con éxito");
-            System.out.println(materia);
+            System.out.println("Materia actualizada con éxito\n" + materia);
         } catch (Exception e) {
-            System.out.println("Error al actualizar materia");
-            System.out.println(e);
+            System.out.println("Error al actualizar materia\n" + e);
         }
     }
 }

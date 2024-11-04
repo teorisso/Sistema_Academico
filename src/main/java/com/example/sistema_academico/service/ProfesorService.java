@@ -16,11 +16,9 @@ public class ProfesorService {
     public void addProfesor(Profesor profesor) {
         try {
             profesorRepository.save(profesor);
-            System.out.println("Profesor agregado con éxito");
-            System.out.println(profesor);
+            System.out.println("Profesor agregado con éxito\n" + profesor);
         } catch (Exception e) {
-            System.out.println("Error al agregar profesor");
-            System.out.println(e);
+            System.out.println("Error al agregar profesor\n" + e);
         }
     }
 
@@ -29,20 +27,17 @@ public class ProfesorService {
             profesorRepository.deleteById(id);
             System.out.println("Profesor eliminado con éxito");
         } catch (Exception e) {
-            System.out.println("Error al eliminar profesor");
-            System.out.println(e);
+            System.out.println("Error al eliminar profesor\n" + e);
         }
     }
 
     public Profesor getProfesor(Integer id) {
         try {
             Profesor profesor = profesorRepository.findById(id).orElse(null);
-            System.out.println("Profesor obtenido con éxito");
-            System.out.println(profesor);
+            System.out.println("Profesor obtenido con éxito\n" + profesor);
             return profesor;
         } catch (Exception e) {
-            System.out.println("Error al obtener profesor");
-            System.out.println(e);
+            System.out.println("Error al obtener profesor\n" + e);
             return null;
         }
     }
@@ -50,12 +45,10 @@ public class ProfesorService {
     public List<Profesor> getProfesores() {
         try {
             List<Profesor> profesores = profesorRepository.findAll();
-            System.out.println("Profesores obtenidos con éxito");
-            System.out.println(profesores);
+            System.out.println("Profesores obtenidos con éxito\n" + profesores);
             return profesores;
         } catch (Exception e) {
-            System.out.println("Error al obtener profesores");
-            System.out.println(e);
+            System.out.println("Error al obtener profesores\n" + e);
             return null;
         }
     }
@@ -63,11 +56,9 @@ public class ProfesorService {
     public void updateProfesor(Profesor profesor) {
         try {
             profesorRepository.save(profesor);
-            System.out.println("Profesor actualizado con éxito");
-            System.out.println(profesor);
+            System.out.println("Profesor actualizado con éxito\n" + profesor);
         } catch (Exception e) {
-            System.out.println("Error al actualizar profesor");
-            System.out.println(e);
+            System.out.println("Error al actualizar profesor\n" + e);
         }
     }
 }

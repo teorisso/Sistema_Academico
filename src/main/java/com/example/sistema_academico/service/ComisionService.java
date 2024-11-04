@@ -16,11 +16,9 @@ public class ComisionService {
     public void addComision(Comision comision) {
         try {
             comisionRepository.save(comision);
-            System.out.println("Comisión agregada con éxito");
-            System.out.println(comision);
+            System.out.println("Comisión agregada con éxito\n" + comision);
         } catch (Exception e) {
-            System.out.println("Error al agregar comisión");
-            System.out.println(e);
+            System.out.println("Error al agregar comisión\n" + e);
         }
     }
 
@@ -29,20 +27,17 @@ public class ComisionService {
             comisionRepository.deleteById(id);
             System.out.println("Comisión eliminada con éxito");
         } catch (Exception e) {
-            System.out.println("Error al eliminar comisión");
-            System.out.println(e);
+            System.out.println("Error al eliminar comisión\n" + e);
         }
     }
 
     public Comision getComision(Integer id) {
         try {
             Comision comision = comisionRepository.findById(id).orElse(null);
-            System.out.println("Comisión obtenida con éxito");
-            System.out.println(comision);
+            System.out.println("Comisión obtenida con éxito\n" + comision);
             return comision;
         } catch (Exception e) {
-            System.out.println("Error al obtener comisión");
-            System.out.println(e);
+            System.out.println("Error al obtener comisión\n" + e);
             return null;
         }
     }
@@ -50,12 +45,10 @@ public class ComisionService {
     public List<Comision> getComisiones() {
         try {
             List<Comision> comisiones = comisionRepository.findAll();
-            System.out.println("Comisiones obtenidas con éxito");
-            System.out.println(comisiones);
+            System.out.println("Comisiones obtenidas con éxito\n" + comisiones);
             return comisiones;
         } catch (Exception e) {
-            System.out.println("Error al obtener comisiones");
-            System.out.println(e);
+            System.out.println("Error al obtener comisiones\n" + e);
             return null;
         }
     }
@@ -63,11 +56,9 @@ public class ComisionService {
     public void updateComision(Comision comision) {
         try {
             comisionRepository.save(comision);
-            System.out.println("Comisión actualizada con éxito");
-            System.out.println(comision);
+            System.out.println("Comisión actualizada con éxito\n" + comision);
         } catch (Exception e) {
-            System.out.println("Error al actualizar comisión");
-            System.out.println(e);
+            System.out.println("Error al actualizar comisión\n" + e);
         }
     }
 }
