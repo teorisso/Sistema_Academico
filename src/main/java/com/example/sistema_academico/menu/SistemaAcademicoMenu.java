@@ -1,4 +1,5 @@
 package com.example.sistema_academico.menu;
+
 import com.example.sistema_academico.entity.Alumno;
 import com.example.sistema_academico.entity.Comision;
 import com.example.sistema_academico.entity.Materia;
@@ -7,7 +8,6 @@ import com.example.sistema_academico.service.AlumnoService;
 import com.example.sistema_academico.service.ComisionService;
 import com.example.sistema_academico.service.MateriaService;
 import com.example.sistema_academico.service.ProfesorService;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
@@ -29,7 +29,7 @@ public class SistemaAcademicoMenu implements CommandLineRunner {
     private Scanner scanner = new Scanner(System.in);
 
     @Override
-    public void run(String... args) throws Exception {
+    public void run(String... args) {
         boolean exit = false;
         while (!exit) {
             System.out.println("\n=== Sistema de Gestión Académica ===");
@@ -44,24 +44,15 @@ public class SistemaAcademicoMenu implements CommandLineRunner {
             scanner.nextLine(); // Clear buffer
 
             switch (choice) {
-                case 1:
-                    administrarAlumnos();
-                    break;
-                case 2:
-                    administrarMaterias();
-                    break;
-                case 3:
-                    administrarComisiones();
-                    break;
-                case 4:
-                    administrarProfesores();
-                    break;
-                case 5:
+                case 1 -> administrarAlumnos();
+                case 2 -> administrarMaterias();
+                case 3 -> administrarComisiones();
+                case 4 -> administrarProfesores();
+                case 5 -> {
                     exit = true;
                     System.out.println("Saliendo del sistema...");
-                    break;
-                default:
-                    System.out.println("Opción inválida. Intente de nuevo.");
+                }
+                default -> System.out.println("Opción inválida. Intente de nuevo.");
             }
         }
     }
@@ -78,20 +69,11 @@ public class SistemaAcademicoMenu implements CommandLineRunner {
         scanner.nextLine(); // Clear buffer
 
         switch (choice) {
-            case 1:
-                crearAlumno();
-                break;
-            case 2:
-                leerAlumno();
-                break;
-            case 3:
-                actualizarAlumno();
-                break;
-            case 4:
-                eliminarAlumno();
-                break;
-            default:
-                System.out.println("Opción inválida.");
+            case 1 -> crearAlumno();
+            case 2 -> leerAlumno();
+            case 3 -> actualizarAlumno();
+            case 4 -> eliminarAlumno();
+            default -> System.out.println("Opción inválida.");
         }
     }
 
@@ -141,7 +123,6 @@ public class SistemaAcademicoMenu implements CommandLineRunner {
         alumnoService.deleteAlumno(legajo);
         System.out.println("Alumno eliminado exitosamente.");
     }
-// Similar methods for Materias, Comisiones, and Profesores
 
     private void administrarMaterias() {
         System.out.println("\n=== Administrar Materias ===");
@@ -155,20 +136,11 @@ public class SistemaAcademicoMenu implements CommandLineRunner {
         scanner.nextLine(); // Clear buffer
 
         switch (choice) {
-            case 1:
-                crearMateria();
-                break;
-            case 2:
-                leerMateria();
-                break;
-            case 3:
-                actualizarMateria();
-                break;
-            case 4:
-                eliminarMateria();
-                break;
-            default:
-                System.out.println("Opción inválida.");
+            case 1 -> crearMateria();
+            case 2 -> leerMateria();
+            case 3 -> actualizarMateria();
+            case 4 -> eliminarMateria();
+            default -> System.out.println("Opción inválida.");
         }
     }
 
@@ -231,20 +203,11 @@ public class SistemaAcademicoMenu implements CommandLineRunner {
         scanner.nextLine(); // Clear buffer
 
         switch (choice) {
-            case 1:
-                crearComision();
-                break;
-            case 2:
-                leerComision();
-                break;
-            case 3:
-                actualizarComision();
-                break;
-            case 4:
-                eliminarComision();
-                break;
-            default:
-                System.out.println("Opción inválida.");
+            case 1 -> crearComision();
+            case 2 -> leerComision();
+            case 3 -> actualizarComision();
+            case 4 -> eliminarComision();
+            default -> System.out.println("Opción inválida.");
         }
     }
 
@@ -302,20 +265,11 @@ public class SistemaAcademicoMenu implements CommandLineRunner {
         scanner.nextLine(); // Clear buffer
 
         switch (choice) {
-            case 1:
-                crearProfesor();
-                break;
-            case 2:
-                leerProfesor();
-                break;
-            case 3:
-                actualizarProfesor();
-                break;
-            case 4:
-                eliminarProfesor();
-                break;
-            default:
-                System.out.println("Opción inválida.");
+            case 1 -> crearProfesor();
+            case 2 -> leerProfesor();
+            case 3 -> actualizarProfesor();
+            case 4 -> eliminarProfesor();
+            default -> System.out.println("Opción inválida.");
         }
     }
 
