@@ -15,7 +15,7 @@ public class CalificacionController {
 
     @PostMapping("/add")
     public void addCalificacion(@RequestBody Calificacion calificacion) {
-        calificacionService.addCalificacion(calificacion);
+        calificacionService.addCalificacion(alumno.getLegajo(), calificacion);
     }
 
 }
