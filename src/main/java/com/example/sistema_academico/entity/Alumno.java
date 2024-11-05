@@ -1,4 +1,3 @@
-
 package com.example.sistema_academico.entity;
 
 import jakarta.persistence.*;
@@ -23,6 +22,6 @@ public class Alumno {
     private List<Materia> materias;
 
     @ManyToOne
-    @JoinColumn(name = "comision_id") // Define la clave foránea hacia Comision
+    @JoinColumn(name = "comision_id")
     private Comision comision;
 }

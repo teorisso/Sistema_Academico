@@ -1,11 +1,8 @@
 package com.example.sistema_academico.controller;
 
 import com.example.sistema_academico.entity.Alumno;
-import com.example.sistema_academico.entity.Comision;
-import com.example.sistema_academico.entity.Materia;
 import com.example.sistema_academico.service.AlumnoService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -15,14 +12,11 @@ import java.util.List;
 public class AlumnoController {
 
     @Autowired
-    AlumnoService alumnoService;
+    private AlumnoService alumnoService;
 
-    @PostMapping ("/add")
+    @PostMapping("/add")
     public void addAlumno(@RequestBody Alumno alumno) {
-
-
         alumnoService.addAlumno(alumno);
-
     }
 
     @DeleteMapping("/delete/{legajo}")
@@ -44,5 +38,4 @@ public class AlumnoController {
     public void updateAlumno(@RequestBody Alumno alumno) {
         alumnoService.updateAlumno(alumno);
     }
-
 }

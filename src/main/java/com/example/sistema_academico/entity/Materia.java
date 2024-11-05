@@ -1,4 +1,3 @@
-
 package com.example.sistema_academico.entity;
 
 import jakarta.persistence.*;
