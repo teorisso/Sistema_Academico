@@ -18,6 +18,9 @@ public class Alumno {
     private String nombre;
     private String apellido;
 
+    @OneToMany(mappedBy = "alumno")
+    private List<Calificacion> calificaciones;
+
     @ManyToMany(mappedBy = "alumnos")
     private List<Materia> materias;
 
