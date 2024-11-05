@@ -16,7 +16,7 @@ public class AlumnoController {
 
     @PostMapping("/add")
     public void addAlumno(@RequestBody Alumno alumno) {
-        alumnoService.addAlumno(alumno);
+        alumnoService.addAlumno(alumno, alumno.getComision().getId());
     }
 
     @DeleteMapping("/delete/{legajo}")

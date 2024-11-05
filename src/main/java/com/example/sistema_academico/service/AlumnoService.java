@@ -1,10 +1,15 @@
 package com.example.sistema_academico.service;
 
 import com.example.sistema_academico.entity.Alumno;
+import com.example.sistema_academico.entity.Materia;
 import com.example.sistema_academico.repository.AlumnoRepository;
+import com.example.sistema_academico.repository.ComisionRepository;
+import com.example.sistema_academico.repository.MateriaRepository;
+import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -12,14 +17,47 @@ public class AlumnoService {
 
     @Autowired
     private AlumnoRepository alumnoRepository;
+    @Autowired
+    private ComisionRepository comisionRepository;
+    @Autowired
+    private MateriaRepository materiaRepository;
 
-    public void addAlumno(Alumno alumno) {
+
+    public void addAlumno(Alumno alumno, Integer comisionId) {
         try {
+            alumno.setComision(comisionRepository.findById(comisionId).orElse(null));
+            alumno.setMaterias(new ArrayList<Materia>());
             alumnoRepository.save(alumno);
             System.out.println("Alumno agregado con exito\n" + alumno);
         } catch (Exception e) {
             System.out.println("Error al agregar alumno\n" + e);
         }
+    }
+
+//    public void addMateria(Integer legajo, Integer materiaId) {
+//        try {
+//            Alumno alumno = alumnoRepository.findById(legajo).orElse(null);
+//            Materia materia = materiaRepository.findById(materiaId).orElse(null);
+//            alumno.getMaterias().add(materia);
+//            System.out.println("Materia agregada con exito\n" + materia);
+//        } catch (Exception e) {
+//            System.out.println("Error al agregar materia\n" + e);
+//        }
+//    }
+
+    public void addMateria(Integer legajo, Integer materiaId) {
+        try {
+            Alumno alumno = alumnoRepository.findById(legajo).orElse(null);
+            Materia materia = materiaRepository.findById(materiaId).orElse(null);
+            if (alumno != null && materia != null) {
+                alumno.getMaterias().add(materia);
+                alumnoRepository.save(alumno);
+                System.out.println("Materia agregada con exito\n" + materia);
+            }
+        } catch (Exception e) {
+            System.out.println("Error al agregar materia\n" + e);
+        }
+
     }
 
     public void deleteAlumno(Integer legajo) {
@@ -34,7 +72,7 @@ public class AlumnoService {
     public Alumno getAlumno(Integer legajo) {
         try {
             Alumno alumno = alumnoRepository.findById(legajo).orElse(null);
-            System.out.println("Alumno obtenido con exito\n" + alumno);
+            System.out.println("Alumno obtenido con exito\n" + alumno.toString());
             return alumno;
         } catch (Exception e) {
             System.out.println("Error al obtener alumno\n" + e);

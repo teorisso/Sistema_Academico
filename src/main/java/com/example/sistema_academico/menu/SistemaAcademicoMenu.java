@@ -26,7 +26,7 @@ public class SistemaAcademicoMenu implements CommandLineRunner {
     @Autowired
     private ProfesorService profesorService;
 
-    private final Scanner scanner = new Scanner(System.in);
+    private final Scanner leer = new Scanner(System.in);
 
     @Override
     public void run(String... args) {
@@ -40,10 +40,10 @@ public class SistemaAcademicoMenu implements CommandLineRunner {
             System.out.println("5. Salir");
             System.out.print("Seleccione una opción: ");
 
-            int choice = scanner.nextInt();
-            scanner.nextLine(); // Clear buffer
+            int seleccion = leer.nextInt();
+            leer.nextLine();
 
-            switch (choice) {
+            switch (seleccion) {
                 case 1 -> administrarAlumnos();
                 case 2 -> administrarMaterias();
                 case 3 -> administrarComisiones();
@@ -63,35 +63,40 @@ public class SistemaAcademicoMenu implements CommandLineRunner {
         System.out.println("2. Leer Alumno");
         System.out.println("3. Actualizar Alumno");
         System.out.println("4. Eliminar Alumno");
+        System.out.println("5. Inscribirse a una materia");
         System.out.print("Seleccione una opción: ");
 
-        int choice = scanner.nextInt();
-        scanner.nextLine(); // Clear buffer
+        int eleccion = leer.nextInt();
+        leer.nextLine();
 
-        switch (choice) {
+        switch (eleccion) {
             case 1 -> crearAlumno();
             case 2 -> leerAlumno();
             case 3 -> actualizarAlumno();
             case 4 -> eliminarAlumno();
+            case 5 -> inscribirseMateria();
             default -> System.out.println("Opción inválida.");
         }
     }
 
     private void crearAlumno() {
         System.out.print("Ingrese nombre del alumno: ");
-        String nombre = scanner.nextLine();
+        String nombre = leer.nextLine();
         System.out.print("Ingrese apellido del alumno: ");
-        String apellido = scanner.nextLine();
+        String apellido = leer.nextLine();
+        System.out.print("Ingrese a qué comisión pertenece (1, 2 o 3): ");
+        Integer comisionId = leer.nextInt();
         Alumno alumno = new Alumno();
         alumno.setNombre(nombre);
         alumno.setApellido(apellido);
-        alumnoService.addAlumno(alumno);
-        System.out.println("Alumno creado exitosamente.");
+        alumnoService.addAlumno(alumno, comisionId);
     }
+
+
 
     private void leerAlumno() {
         System.out.print("Ingrese el legajo del alumno: ");
-        int legajo = scanner.nextInt();
+        Integer legajo = leer.nextInt();
         Alumno alumno = alumnoService.getAlumno(legajo);
         if (alumno != null) {
             System.out.println("Alumno encontrado: " + alumno);
@@ -102,14 +107,14 @@ public class SistemaAcademicoMenu implements CommandLineRunner {
 
     private void actualizarAlumno() {
         System.out.print("Ingrese el legajo del alumno a actualizar: ");
-        int legajo = scanner.nextInt();
-        scanner.nextLine(); // Clear buffer
+        int legajo = leer.nextInt();
+        leer.nextLine(); // Clear buffer
         Alumno alumno = alumnoService.getAlumno(legajo);
         if (alumno != null) {
             System.out.print("Ingrese el nuevo nombre: ");
-            alumno.setNombre(scanner.nextLine());
+            alumno.setNombre(leer.nextLine());
             System.out.print("Ingrese el nuevo apellido: ");
-            alumno.setApellido(scanner.nextLine());
+            alumno.setApellido(leer.nextLine());
             alumnoService.updateAlumno(alumno);
             System.out.println("Alumno actualizado exitosamente.");
         } else {
@@ -119,9 +124,16 @@ public class SistemaAcademicoMenu implements CommandLineRunner {
 
     private void eliminarAlumno() {
         System.out.print("Ingrese el legajo del alumno a eliminar: ");
-        int legajo = scanner.nextInt();
+        int legajo = leer.nextInt();
         alumnoService.deleteAlumno(legajo);
-        System.out.println("Alumno eliminado exitosamente.");
+    }
+
+    private void inscribirseMateria() {
+        System.out.print("Ingrese el legajo del alumno: ");
+        Integer legajo = leer.nextInt();
+        System.out.print("Ingrese el ID de la materia: ");
+        Integer materiaId = leer.nextInt();
+        alumnoService.addMateria(legajo, materiaId);
     }
 
     private void administrarMaterias() {
@@ -132,8 +144,8 @@ public class SistemaAcademicoMenu implements CommandLineRunner {
         System.out.println("4. Eliminar Materia");
         System.out.print("Seleccione una opción: ");
 
-        int choice = scanner.nextInt();
-        scanner.nextLine(); // Clear buffer
+        int choice = leer.nextInt();
+        leer.nextLine(); // Clear buffer
 
         switch (choice) {
             case 1 -> crearMateria();
@@ -146,9 +158,9 @@ public class SistemaAcademicoMenu implements CommandLineRunner {
 
     private void crearMateria() {
         System.out.print("Ingrese el nombre de la materia: ");
-        String nombre = scanner.nextLine();
+        String nombre = leer.nextLine();
         System.out.print("Ingrese la descripción de la materia: ");
-        String descripcion = scanner.nextLine();
+        String descripcion = leer.nextLine();
         Materia materia = new Materia();
         materia.setNombre(nombre);
         materia.setDescripcion(descripcion);
@@ -158,7 +170,7 @@ public class SistemaAcademicoMenu implements CommandLineRunner {
 
     private void leerMateria() {
         System.out.print("Ingrese el ID de la materia: ");
-        int id = scanner.nextInt();
+        int id = leer.nextInt();
         Materia materia = materiaService.getMateria(id);
         if (materia != null) {
             System.out.println("Materia encontrada: " + materia);
@@ -169,14 +181,14 @@ public class SistemaAcademicoMenu implements CommandLineRunner {
 
     private void actualizarMateria() {
         System.out.print("Ingrese el ID de la materia a actualizar: ");
-        int id = scanner.nextInt();
-        scanner.nextLine(); // Clear buffer
+        int id = leer.nextInt();
+        leer.nextLine(); // Clear buffer
         Materia materia = materiaService.getMateria(id);
         if (materia != null) {
             System.out.print("Ingrese el nuevo nombre de la materia: ");
-            materia.setNombre(scanner.nextLine());
+            materia.setNombre(leer.nextLine());
             System.out.print("Ingrese la nueva descripción de la materia: ");
-            materia.setDescripcion(scanner.nextLine());
+            materia.setDescripcion(leer.nextLine());
             materiaService.updateMateria(materia);
             System.out.println("Materia actualizada exitosamente.");
         } else {
@@ -186,7 +198,7 @@ public class SistemaAcademicoMenu implements CommandLineRunner {
 
     private void eliminarMateria() {
         System.out.print("Ingrese el ID de la materia a eliminar: ");
-        int id = scanner.nextInt();
+        int id = leer.nextInt();
         materiaService.deleteMateria(id);
         System.out.println("Materia eliminada exitosamente.");
     }
@@ -199,8 +211,8 @@ public class SistemaAcademicoMenu implements CommandLineRunner {
         System.out.println("4. Eliminar Comisión");
         System.out.print("Seleccione una opción: ");
 
-        int choice = scanner.nextInt();
-        scanner.nextLine(); // Clear buffer
+        int choice = leer.nextInt();
+        leer.nextLine();
 
         switch (choice) {
             case 1 -> crearComision();
@@ -213,7 +225,7 @@ public class SistemaAcademicoMenu implements CommandLineRunner {
 
     private void crearComision() {
         System.out.print("Ingrese el nombre de la comisión: ");
-        String nombre = scanner.nextLine();
+        String nombre = leer.nextLine();
         Comision comision = new Comision();
         comision.setNombre(nombre);
         comisionService.addComision(comision);
@@ -222,7 +234,7 @@ public class SistemaAcademicoMenu implements CommandLineRunner {
 
     private void leerComision() {
         System.out.print("Ingrese el ID de la comisión: ");
-        int id = scanner.nextInt();
+        int id = leer.nextInt();
         Comision comision = comisionService.getComision(id);
         if (comision != null) {
             System.out.println("Comisión encontrada: " + comision);
@@ -233,12 +245,12 @@ public class SistemaAcademicoMenu implements CommandLineRunner {
 
     private void actualizarComision() {
         System.out.print("Ingrese el ID de la comisión a actualizar: ");
-        int id = scanner.nextInt();
-        scanner.nextLine(); // Clear buffer
+        int id = leer.nextInt();
+        leer.nextLine();
         Comision comision = comisionService.getComision(id);
         if (comision != null) {
             System.out.print("Ingrese el nuevo nombre de la comisión: ");
-            comision.setNombre(scanner.nextLine());
+            comision.setNombre(leer.nextLine());
             comisionService.updateComision(comision);
             System.out.println("Comisión actualizada exitosamente.");
         } else {
@@ -248,7 +260,7 @@ public class SistemaAcademicoMenu implements CommandLineRunner {
 
     private void eliminarComision() {
         System.out.print("Ingrese el ID de la comisión a eliminar: ");
-        int id = scanner.nextInt();
+        int id = leer.nextInt();
         comisionService.deleteComision(id);
         System.out.println("Comisión eliminada exitosamente.");
     }
@@ -261,8 +273,8 @@ public class SistemaAcademicoMenu implements CommandLineRunner {
         System.out.println("4. Eliminar Profesor");
         System.out.print("Seleccione una opción: ");
 
-        int choice = scanner.nextInt();
-        scanner.nextLine(); // Clear buffer
+        int choice = leer.nextInt();
+        leer.nextLine(); // Clear buffer
 
         switch (choice) {
             case 1 -> crearProfesor();
@@ -275,9 +287,9 @@ public class SistemaAcademicoMenu implements CommandLineRunner {
 
     private void crearProfesor() {
         System.out.print("Ingrese el nombre del profesor: ");
-        String nombre = scanner.nextLine();
+        String nombre = leer.nextLine();
         System.out.print("Ingrese el apellido del profesor: ");
-        String apellido = scanner.nextLine();
+        String apellido = leer.nextLine();
         Profesor profesor = new Profesor();
         profesor.setNombre(nombre);
         profesor.setApellido(apellido);
@@ -287,7 +299,7 @@ public class SistemaAcademicoMenu implements CommandLineRunner {
 
     private void leerProfesor() {
         System.out.print("Ingrese el ID del profesor: ");
-        int id = scanner.nextInt();
+        int id = leer.nextInt();
         Profesor profesor = profesorService.getProfesor(id);
         if (profesor != null) {
             System.out.println("Profesor encontrado: " + profesor);
@@ -298,14 +310,14 @@ public class SistemaAcademicoMenu implements CommandLineRunner {
 
     private void actualizarProfesor() {
         System.out.print("Ingrese el ID del profesor a actualizar: ");
-        int id = scanner.nextInt();
-        scanner.nextLine(); // Clear buffer
+        int id = leer.nextInt();
+        leer.nextLine();
         Profesor profesor = profesorService.getProfesor(id);
         if (profesor != null) {
             System.out.print("Ingrese el nuevo nombre del profesor: ");
-            profesor.setNombre(scanner.nextLine());
+            profesor.setNombre(leer.nextLine());
             System.out.print("Ingrese el nuevo apellido del profesor: ");
-            profesor.setApellido(scanner.nextLine());
+            profesor.setApellido(leer.nextLine());
             profesorService.updateProfesor(profesor);
             System.out.println("Profesor actualizado exitosamente.");
         } else {
@@ -315,7 +327,7 @@ public class SistemaAcademicoMenu implements CommandLineRunner {
 
     private void eliminarProfesor() {
         System.out.print("Ingrese el ID del profesor a eliminar: ");
-        int id = scanner.nextInt();
+        int id = leer.nextInt();
         profesorService.deleteProfesor(id);
         System.out.println("Profesor eliminado exitosamente.");
     }

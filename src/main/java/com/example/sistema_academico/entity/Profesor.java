@@ -23,4 +23,35 @@ public class Profesor {
 
     @ManyToMany(mappedBy = "profesores")
     private List<Comision> comisiones;
+
+    @Override
+    public String toString() {
+        StringBuilder info = new StringBuilder();
+        info.append("Profesor: ID: ").append(id)
+                .append(", Nombre: ").append(nombre)
+                .append(", Apellido: ").append(apellido).append("\n");
+
+        info.append("Materias: ");
+        if (materias != null && !materias.isEmpty()) {
+            for (Materia materia : materias) {
+                info.append("ID: ").append(materia.getId())
+                        .append(", Nombre: ").append(materia.getNombre()).append("; ");
+            }
+        } else {
+            info.append("No hay materias asignadas.");
+        }
+
+        info.append("\nComisiones: ");
+        if (comisiones != null && !comisiones.isEmpty()) {
+            for (Comision comision : comisiones) {
+                info.append("ID: ").append(comision.getId())
+                        .append(", Nombre: ").append(comision.getNombre()).append("; ");
+            }
+        } else {
+            info.append("No hay comisiones asignadas.");
+        }
+
+        return info.toString();
+    }
+
 }
