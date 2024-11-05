@@ -4,6 +4,7 @@ import com.example.sistema_academico.entity.Calificacion;
 import com.example.sistema_academico.repository.CalificacionRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -13,7 +14,7 @@ public class CalificacionService {
     @Autowired
     private CalificacionRepository calificacionRepository;
 
-    // Agregar una nueva calificación para un alumno
+    @Transactional
     public void addCalificacion(Integer legajo, Calificacion calificacion) {
         try {
             calificacion.calcularCalificacion();
@@ -24,7 +25,7 @@ public class CalificacionService {
         }
     }
 
-    // Eliminar todas las calificaciones de un alumno por su legajo
+    @Transactional
     public void deleteCalificacionesPorLegajo(Integer legajo) {
         try {
             List<Calificacion> calificaciones = calificacionRepository.findByAlumnoLegajo(legajo);
@@ -39,7 +40,6 @@ public class CalificacionService {
         }
     }
 
-    // Obtener todas las calificaciones de un alumno por su legajo
     public List<Calificacion> getCalificaciones(Integer legajoAlumno) {
         try {
             List<Calificacion> calificaciones = calificacionRepository.findByAlumnoLegajo(legajoAlumno);
@@ -55,7 +55,6 @@ public class CalificacionService {
         }
     }
 
-    // Obtener todas las calificaciones existentes
     public List<Calificacion> getCalificaciones() {
         try {
             List<Calificacion> calificaciones = calificacionRepository.findAll();
@@ -71,7 +70,7 @@ public class CalificacionService {
         }
     }
 
-    // Actualizar las calificaciones de un alumno específico
+    @Transactional
     public void updateCalificacion(Integer legajo, Calificacion nuevaCalificacion) {
         try {
             List<Calificacion> calificaciones = calificacionRepository.findByAlumnoLegajo(legajo);

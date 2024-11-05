@@ -2,6 +2,7 @@ package com.example.sistema_academico.service;
 
 import com.example.sistema_academico.entity.Profesor;
 import com.example.sistema_academico.repository.ProfesorRepository;
+import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -13,6 +14,7 @@ public class ProfesorService {
     @Autowired
     private ProfesorRepository profesorRepository;
 
+    @Transactional
     public void addProfesor(Profesor profesor) {
         try {
             profesorRepository.save(profesor);

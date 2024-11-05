@@ -4,6 +4,7 @@ import com.example.sistema_academico.entity.Materia;
 import com.example.sistema_academico.repository.MateriaRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -13,6 +14,7 @@ public class MateriaService {
     @Autowired
     private MateriaRepository materiaRepository;
 
+    @Transactional
     public void addMateria(Materia materia) {
         try {
             materiaRepository.save(materia);
@@ -22,6 +24,7 @@ public class MateriaService {
         }
     }
 
+    @Transactional
     public void deleteMateria(Integer id) {
         try {
             materiaRepository.deleteById(id);
@@ -53,6 +56,7 @@ public class MateriaService {
         }
     }
 
+    @Transactional
     public void updateMateria(Materia materia) {
         try {
             materiaRepository.save(materia);

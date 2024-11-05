@@ -22,7 +22,7 @@ public class AlumnoService {
     @Autowired
     private MateriaRepository materiaRepository;
 
-
+    @Transactional
     public void addAlumno(Alumno alumno, Integer comisionId) {
         try {
             alumno.setComision(comisionRepository.findById(comisionId).orElse(null));
@@ -34,17 +34,7 @@ public class AlumnoService {
         }
     }
 
-//    public void addMateria(Integer legajo, Integer materiaId) {
-//        try {
-//            Alumno alumno = alumnoRepository.findById(legajo).orElse(null);
-//            Materia materia = materiaRepository.findById(materiaId).orElse(null);
-//            alumno.getMaterias().add(materia);
-//            System.out.println("Materia agregada con exito\n" + materia);
-//        } catch (Exception e) {
-//            System.out.println("Error al agregar materia\n" + e);
-//        }
-//    }
-
+    @Transactional
     public void addMateria(Integer legajo, Integer materiaId) {
         try {
             Alumno alumno = alumnoRepository.findById(legajo).orElse(null);
@@ -57,9 +47,9 @@ public class AlumnoService {
         } catch (Exception e) {
             System.out.println("Error al agregar materia\n" + e);
         }
-
     }
 
+    @Transactional
     public void deleteAlumno(Integer legajo) {
         try {
             alumnoRepository.deleteById(legajo);
@@ -91,6 +81,7 @@ public class AlumnoService {
         }
     }
 
+    @Transactional
     public void updateAlumno(Alumno alumno) {
         try {
             alumnoRepository.save(alumno);

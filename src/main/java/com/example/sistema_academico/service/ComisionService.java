@@ -4,6 +4,7 @@ import com.example.sistema_academico.entity.Comision;
 import com.example.sistema_academico.repository.ComisionRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -13,6 +14,7 @@ public class ComisionService {
     @Autowired
     private ComisionRepository comisionRepository;
 
+    @Transactional
     public void addComision(Comision comision) {
         try {
             comisionRepository.save(comision);
@@ -22,6 +24,7 @@ public class ComisionService {
         }
     }
 
+    @Transactional
     public void deleteComision(Integer id) {
         try {
             comisionRepository.deleteById(id);
@@ -53,6 +56,7 @@ public class ComisionService {
         }
     }
 
+    @Transactional
     public void updateComision(Comision comision) {
         try {
             comisionRepository.save(comision);
