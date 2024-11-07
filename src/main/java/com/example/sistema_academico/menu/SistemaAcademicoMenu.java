@@ -14,7 +14,7 @@ import org.springframework.stereotype.Component;
 
 import java.util.Scanner;
 
-@Component
+// @Component
 public class SistemaAcademicoMenu implements CommandLineRunner {
 
     @Autowired

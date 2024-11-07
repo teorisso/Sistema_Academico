@@ -50,7 +50,30 @@ public class AlumnoService {
     }
 
     @Transactional
+    public void crearAlumno(Alumno alumno) {
+        try {
+            List<Materia> materias = new ArrayList<>();
+
+
+            alumno.setMaterias(new ArrayList<Materia>());
+            alumnoRepository.save(alumno);
+        } catch (Exception e) {
+            System.out.println("Error al crear alumno\n" + e);
+        }
+    }
+
+
+    @Transactional
     public void deleteAlumno(Integer legajo) {
+        try {
+            alumnoRepository.deleteById(legajo);
+            System.out.println("Alumno eliminado con exito");
+        } catch (Exception e) {
+            System.out.println("Error al eliminar alumno\n" + e);
+        }
+    }
+
+    public void borrarAlumno(Integer legajo) {
         try {
             alumnoRepository.deleteById(legajo);
             System.out.println("Alumno eliminado con exito");
@@ -66,6 +89,26 @@ public class AlumnoService {
             return alumno;
         } catch (Exception e) {
             System.out.println("Error al obtener alumno\n" + e);
+            return null;
+        }
+    }
+
+    public Alumno traerAlumno(Integer legajo) {
+        try {
+            Alumno alumno = alumnoRepository.findById(legajo).orElse(null);
+            return alumno;
+        } catch (Exception e) {
+            System.out.println("Error al obtener alumno\n" + e);
+            return null;
+        }
+    }
+
+    public List<Alumno> traerAlumnos() {
+        try {
+            List<Alumno> alumnos = alumnoRepository.findAll();
+            return alumnos;
+        } catch (Exception e) {
+            System.out.println("Error al obtener alumnos\n" + e);
             return null;
         }
     }
@@ -86,6 +129,21 @@ public class AlumnoService {
         try {
             alumnoRepository.save(alumno);
             System.out.println("Alumno actualizado con exito\n" + alumno);
+        } catch (Exception e) {
+            System.out.println("Error al actualizar alumno\n" + e);
+        }
+    }
+
+    public void editarAlumno(Integer legajo, String nombre, String apellido) {
+        try {
+            Alumno alu = this.traerAlumno(legajo);
+            if (nombre != null) {
+                alu.setNombre(nombre);
+            }
+            if (apellido != null) {
+                alu.setApellido(apellido);
+            }
+            this.crearAlumno(alu);
         } catch (Exception e) {
             System.out.println("Error al actualizar alumno\n" + e);
         }

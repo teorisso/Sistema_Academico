@@ -1,5 +1,6 @@
 package com.example.sistema_academico.entity;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -14,7 +15,7 @@ import java.util.List;
 public class Comision {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+    private Integer id;
     private String nombre;
 
     @ManyToMany(fetch = FetchType.EAGER)
@@ -26,6 +27,7 @@ public class Comision {
     private List<Profesor> profesores;
 
     @OneToMany(mappedBy = "comision", fetch = FetchType.EAGER)
+    @JsonBackReference
     private List<Alumno> alumnos;
 
     @Override
